@@ -1,0 +1,32 @@
+{
+  "name": "picso",
+  "version": "1.0.0",
+  "description": "Aplicacion para compartir imagenes de evento del TecNM",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "#"
+  },
+  "keywords": [
+    "mvc",
+    "pwpc",
+    "itgam"
+  ],
+  "author": "@Rivalcoba",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "errorhandler": "^1.5.0",
+    "express": "^4.15.3",
+    "express-handlebars": "^3.0.0",
+    "method-override": "^2.3.9",
+    "moment": "^2.18.1",
+    "morgan": "^1.8.2",
+    "multer": "^1.3.0"
+  }
+}

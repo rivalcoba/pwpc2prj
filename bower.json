@@ -1,0 +1,26 @@
+{
+  "name": "picso",
+  "description": "Aplicacion para compartir imagenes de evento del TecNM",
+  "main": "server.js",
+  "authors": [
+    "@Rivalcoba"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "mvc",
+    "pwpc",
+    "itgam"
+  ],
+  "homepage": "#",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
