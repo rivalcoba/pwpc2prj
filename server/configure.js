@@ -27,6 +27,7 @@ module.exports = function(app){
     if('development' === app.get('env')){
         app.use(errorHandler());
     }
-
+    
+    // Se regresa la app configurada
     return app;
 };
