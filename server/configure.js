@@ -18,8 +18,13 @@ module.exports = function(app){
     app.use(bodyParser.json());
     app.use(methodOverride());
     app.use(cookieParser('algun-valor-secreto-aqui'));
-    
+
+    // Se aplican la configuracion de rutas
+    app = routes(app);
+
     // Configuracion de archivos estaticos
+    // Es buena practica que los estaticos
+    // esten al final
     app.use('/public', express.static(path.join(__dirname, '../public')));
 
     // Si la aplicacion esta en modo

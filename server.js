@@ -13,10 +13,7 @@ app.set('ip', process.env.IP || "0.0.0.0");
 app.set('views', path.join(__dirname + '/views'));
 // Aplicando Configuraciones
 config(app);
-// Creando una ruta de prueba
-app.get('/', (req, res)=>{
-    res.send("Hola ITGAM");
-});
+
 // Consultando variable de entorno
 var IP = app.get('ip');
 var PORT = app.get('port');
