@@ -1,6 +1,6 @@
 // Cargando dependencias
 var path = require('path'),
-    exphdn = require('express-handlebars'),
+    exphdb = require('express-handlebars'),
     express = require('express'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
@@ -12,6 +12,26 @@ var path = require('path'),
  var routes = require('./routes');
 
 module.exports = function(app){
+    // Configurando Handlebars
+    // 1 Dando de alta el template engine
+    // estableciendo el nombre y el
+    // middleware
+    app.engine('.hbs',exphdb.create({
+        defaultLayout : 'main', // Plantilla por defecto
+        extname : '.hbs', // Extencion de vistas
+        layoutsDir : path.join(app.get('views'),'layouts'),
+        partialsDir : [path.join(app.get('views'),'partials')],
+        helpers : {
+            timeago : function(timestamp){
+                return moment(timestamp).startOf('minute').fromNow();
+            }
+        }
+    }).engine);
+
+    // Se establece a hbs como
+    // el Template engine de trabajo
+    app.set('view engine', '.hbs');
+
     // Agregando Middlewares Generales
     app.use(morgan('dev'));
     app.use(bodyParser.urlencoded({'extended':true}));
