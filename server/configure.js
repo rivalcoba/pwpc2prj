@@ -23,7 +23,8 @@ module.exports = function(app){
         partialsDir : [path.join(app.get('views'),'partials')],
         helpers : {
             timeago : function(timestamp){
-                return moment(timestamp).startOf('minute').fromNow();
+                return moment(timestamp).
+                startOf('minute').fromNow();
             }
         }
     }).engine);
