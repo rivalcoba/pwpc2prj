@@ -3,13 +3,13 @@
     <!-- HEADING -->
     <div class="panel-heading">
         <h2 class="panel-title">
-            {{image.title}}
+             {{image.title}}
         </h2>     
     </div>
     <!-- BODY -->
     <div class="panel-body">
         <p>{{image.description}}</p>
-        <di-v class="col-md-12 text-center">
+        <div class="col-md-12 text-center">
             <img 
             class="img-thumbnail"
             src="/public/upload/{{image.filename}}" 
@@ -20,19 +20,19 @@
     <div class="panel-footer">
         <div class="row">
             <div class="col-md-8">
-                <buttom class="btn btn-success" 
+                <button class="btn btn-success" 
                 id="btn-like" 
                 data-id="{{image.uniqueId}}">
                     <i class="fa fa-heart"> 
                         like
                     </i>
-                </buttom>
+                </button>
                 <strong class="likes-count">
                     {{image.likes}}
-                </strong> &nbsp; - &nmsp; 
+                </strong>&nbsp;-&nbsp; 
                 <i class="fa fa-eye"></i>
-                strong{{{image.views}}}
-                &nbsp; - &nmsp;Posted: 
+                <strong>{{image.views}}</strong>
+                &nbsp;-&nbsp;Posted: 
                 <em class="text-muted">
                     {{timeago image.timestamp}}
                 </em>
@@ -104,33 +104,30 @@
                         </div>
                     </div>
                     <!-- P3 -->
-                    <div 
-                    class="form-group col-sm-12">
+                    <div class="form-group col-sm-12">
                         <label 
-                        for="name" 
+                        for="comment" 
                         class="col-sm-2 control-label">
                             Comentar:
                         </label>
-                        <div 
-                        class="col-sm-10">
+                        <div class="col-sm-10">
                             <textarea 
                             class="form-control" 
                             id=""
                             rows="2"
                             name="comment">
+                            </textarea>
                         </div>
                     </div>
                     <!-- P4 -->
                     <div 
                     class="form-group col-sm-12">
-                        <div 
-                        class="col-sm-12 text-right">
-                            <button
-                            class="btn btn-success"
+                        <div class="col-sm-12 text-right">
+                            <button class="btn btn-success"
                             type="submit"
-                            id="comment-btn"
+                            id="comment-btn">
                                 <i class="fa fa-comments"></i>
-                                Post
+                                Publicar
                             </button>
                         </div>
                     </div>
