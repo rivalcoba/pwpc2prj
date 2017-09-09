@@ -1,7 +1,7 @@
 module.exports = {
     // Action Methods
     index : (req, res)=>{
-        res.end(`Index de Imagen, se muestra imagen: ${req.params.image_id}`);
+        res.render("image");
     },
     create : (req, res)=>{
         res.end(`> Se crea nueva imagen`);
