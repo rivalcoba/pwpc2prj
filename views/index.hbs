@@ -4,44 +4,44 @@
             Cargar una imagen
         </h3>
     </div>
+    <form action="/images" method="post" enctype="multipart/form-data">
+        <div class="panel-body form-horizontal">
+            <div class="form-group col-md-12">
+                <label for="file" class="col-sm-2 control-label">
+                    Buscar: 
+                </label>
+                <div class="col-md-10">
+                    <input type="file" class="form-control" name="file" id="file">
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="title" class="col-sm-2 control-label">
+                    Titulo: 
+                </label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="title">
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="description" class="col-md-2 control-label">
+                    Descripción: 
+                </label>
+                <div class="col-md-10">
+                    <textarea name="description" rows="2" class="form-control">
+                    </textarea>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-success" type="submit" id="login-btn">
+                        <i class="fa fa-cloud-upload"></i>
+                        Cargar imagen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
-<form action="/images" method="post" enctype="multipart/form-data">
-    <div class="panel-body form-horizontal">
-        <div class="form-group col-md-12">
-            <label for="file" class="col-sm-2 control-label">
-                Buscar: 
-            </label>
-            <div class="col-md-10">
-                <input type="file" class="form-control" name="file" id="file">
-            </div>
-        </div>
-        <div class="form-group col-md-12">
-            <label for="title" class="col-sm-2 control-label">
-                Titulo: 
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="title">
-            </div>
-        </div>
-        <div class="form-group col-md-12">
-            <label for="description" class="col-md-2 control-label">
-                Descripción: 
-            </label>
-            <div class="col-md-10">
-                <textarea name="description" rows="2" class="form-control">
-                </textarea>
-            </div>
-        </div>
-        <div class="form-group col-md-12">
-            <div class="col-md-12 text-right">
-                <button class="btn btn-success" type="submit" id="login-btn">
-                    <i class="fa fa-cloud-upload"></i>
-                    Cargar imagen
-                </button>
-            </div>
-        </div>
-    </div>
-</form>
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">
@@ -55,9 +55,9 @@
                 <a href="/images/{{uniqueId}}">
                     <img 
                     class="img-thumbnail" 
-                    style="width: 175px; height: 175px;">
+                    style="width: 175px; height: 175px;"
                     src="/public/upload/{{filename}}" 
-                    alt="{{title}}" 
+                    alt="{{title}}">
                 </a>
             </div>
         {{/each}}
