@@ -1,3 +1,7 @@
+// Dependencias
+var fs = require('fs'),
+    path = require('path');
+
 module.exports = {
     // Action Methods
     index : (req, res)=>{
@@ -34,7 +38,52 @@ module.exports = {
         res.render("image", ViewModel);
     },
     create : (req, res)=>{
-        res.end(`> Se crea nueva imagen`);
+        // Se implementa un CB
+        var saveImage = ()=>{
+            // Generando una lista de
+            // caracteres validos
+            var dictionary = "abcdefghijklmnopqertuvwxyz123456789";
+            var imgUrl = "";
+            // Creando un nombre de 6 caracteres
+            // tomados al azar
+            for(var i = 0; i < 6; i++){
+                imgUrl += dictionary.charAt(Math.floor(Math.random() * dictionary.length));
+            }
+            // Cargando el archivo a los estaticos
+            var temPath = req.files[0].path;
+            // Extrayendo la extension del archivo cargado
+            var ext = 
+                path.extname(req.files[0].originalname).toLowerCase();
+            // Generando la ruta final de carga
+            var targetPath = 
+                path.resolve('./public/upload/' + imgUrl + ext);
+            console.log(`> Path de archivo cargado: ${targetPath}`);
+            // Almacenando el archivo si este cumple con una
+            // politica de extensiones permitidas
+            if(ext === '.png' ||
+            ext === '.jpg' ||
+            ext === '.jpeg' ||
+            ext ==='.gif'){
+                // Cambiando la ruta del archivo
+                fs.rename(temPath, targetPath, (err)=>{
+                    if(err) throw err;
+                    // Redirecciona la app a...
+                    res.redirect('/images/index/' + imgUrl);
+                });
+            }else{
+                fs.unlink(temPath, (err)=>{
+                    if(err) throw err;
+                    console.log(`> Se borra archivo: ${temPath}`);
+                    res.status(500).json(
+                        {
+                            error: 'Solo archivos de imagenes permitidos'
+                        }
+                    );
+                });
+            }
+        };
+        saveImage();
+        //res.end(`> Se crea nueva imagen`);
     },
     like : (req, res)=>{
         res.end(`Like de la imagen: ${req.params.image_id}`);
