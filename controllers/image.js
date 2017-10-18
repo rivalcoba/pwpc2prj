@@ -77,7 +77,10 @@ module.exports = {
                 });
             }else{
                 fs.unlink(temPath, (err)=>{
-                    if(err) throw err;
+                    if(err){
+                        console.log(`> Error al borrar: ${temPath}`)
+                        throw err;
+                    };
                     console.log(`> Se borra archivo: ${temPath}`);
                     res.status(500).json(
                         {
