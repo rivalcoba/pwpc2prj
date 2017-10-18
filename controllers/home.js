@@ -1,3 +1,6 @@
+// Imporntado codigos
+// del Sidebar
+var sidebar = require('../helpers/sidebar');
 module.exports = {
     // Action Method
     index:(req, res)=>{
@@ -42,7 +45,11 @@ module.exports = {
                 }
             ]
         };
-        res.render("index", viewModel);
+        // Resolviendo los datos
+        // de la Sidebar
+        sidebar(viewModel,(viewModel)=>{
+            res.render("index", viewModel);
+        });
     }
 };
 // TO DO: U2_8#6 continuar

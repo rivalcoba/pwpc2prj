@@ -43,7 +43,7 @@ module.exports = function(app){
     // Se Habilita la carga de archivos
     // desde el cliente con multiplart/form
     app.use(multer({
-        dest: path.join(__dirname,'public/upload/temp')
+        dest: path.join(__dirname,'../public/upload/temp')
     }).any());
 
     // Se aplican la configuracion de rutas

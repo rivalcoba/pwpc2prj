@@ -2,3 +2,5 @@
 node_modules
 # Modulos Bower
 public/vendor
+# Ignora logs
+*.log

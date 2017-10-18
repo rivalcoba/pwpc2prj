@@ -1,12 +1,14 @@
 // Dependencias
 var fs = require('fs'),
     path = require('path');
+// Importando el Helper sidebar
+var sidebar = require("../helpers/sidebar");
 
 module.exports = {
     // Action Methods
     index : (req, res)=>{
         // Agregando el ViewModel
-        var ViewModel = {
+        var viewModel = {
             image: {
                 uniqueId: 1,
                 title: "Sample Image 1",
@@ -35,7 +37,10 @@ module.exports = {
                 }
             ]
         };
-        res.render("image", ViewModel);
+        // Ejecutando Helper Sidebar
+        sidebar(viewModel,(viewModel)=>{
+            res.render('image', viewModel);
+        });
     },
     create : (req, res)=>{
         // Se implementa un CB
