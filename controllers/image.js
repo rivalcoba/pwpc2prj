@@ -3,7 +3,7 @@ var fs = require('fs'),
     path = require('path');
 // Importando el Helper sidebar
 var sidebar = require("../helpers/sidebar");
-
+var picLike = 0;
 module.exports = {
     // Action Methods
     index : (req, res)=>{
@@ -94,10 +94,9 @@ module.exports = {
         //res.end(`> Se crea nueva imagen`);
     },
     like : (req, res)=>{
-        res.end(`Like de la imagen: ${req.params.image_id}`);
+        res.json({likes: ++picLike});
     },
     comment : (req, res)=>{
         res.end(`Comentario de la imagen: ${req.params.image_id}`);
     }
 };
-
