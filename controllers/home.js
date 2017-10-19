@@ -1,55 +1,30 @@
 // Imporntado codigos
 // del Sidebar
 var sidebar = require('../helpers/sidebar');
+// Cargando modelos
+var ImageModel = require('../models').Image;
 module.exports = {
     // Action Method
     index:(req, res)=>{
         // Creando el Viewmodel
         var viewModel = {
-            images: [
-                {
-                    uniqueId: 1,
-                    title: "Sample test Image 1",
-                    description:'An awesome Image 1',
-                    filename: 'sample.png',
-                    views:0,
-                    likes:0,
-                    timestamp: Date.now()
-                },
-                {
-                    uniqueId: 2,
-                    title: "Sample test Image 2",
-                    description:'An awesome Image 2',
-                    filename: 'sample.png',
-                    views:0,
-                    likes:0,
-                    timestamp: Date.now()
-                },
-                {
-                    uniqueId: 3,
-                    title: "Sample test Image 3",
-                    description:'An awesome Image 3',
-                    filename: 'sample.png',
-                    views:0,
-                    likes:0,
-                    timestamp: Date.now()
-                },
-                {
-                    uniqueId: 4,
-                    title: "Sample test Image 4",
-                    description:'An awesome Image 4',
-                    filename: 'sample.png',
-                    views:0,
-                    likes:0,
-                    timestamp: Date.now()
-                }
-            ]
+            images: []
         };
-        // Resolviendo los datos
-        // de la Sidebar
-        sidebar(viewModel,(viewModel)=>{
-            res.render("index", viewModel);
+        //Realizando la consulta
+        // find({consulta},{proyeccion},{opciones},cb)
+        ImageModel.find({},{},{
+            sort:{timestamp: -1}
+        },function(err, images){
+            if(err){
+                console.log("> Error en consulta home/index");
+                throw err;
+            }
+            viewModel.images = images;
+            // Resolviendo los datos
+            // de la Sidebar
+            sidebar(viewModel,(viewModel)=>{
+                res.render("index", viewModel);
+            });
         });
     }
 };
-// TO DO: U2_8#6 continuar

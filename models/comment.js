@@ -13,7 +13,7 @@ var CommentSchema = new Schema({
     timestamp:  { type: Date, 'default': Date.now() }
 });
 // Creando una propiedad virtual
-ImageSchema.virtual('image')
+CommentSchema.virtual('image')
     .set(function (image){
         this._image = image;
     }).get(function(){
