@@ -6,6 +6,8 @@ const path = require('path');
 const config = require('./server/configure');
 // Creando una instancia de la aplicacion
 const app = express();
+// Agregando al dependencia Mongoose
+const mongoose = require('mongoose');
 // Estableciendo variables de entorno de la app
 app.set('port', process.env.PORT || 3000);
 app.set('ip', process.env.IP || "0.0.0.0");
@@ -13,6 +15,11 @@ app.set('ip', process.env.IP || "0.0.0.0");
 app.set('views', path.join(__dirname + '/views'));
 // Aplicando Configuraciones
 config(app);
+// Conexion con mongoose
+mongoose.connect('mongodb://localhost/picito');
+mongoose.connection.on('open', function(){
+    console.log('> Conexion con base de datos exitosa...');
+});
 
 // Consultando variable de entorno
 var IP = app.get('ip');
