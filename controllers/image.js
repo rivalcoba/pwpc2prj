@@ -2,10 +2,11 @@
 var fs = require('fs'),
     path = require('path'),
     sidebar = require('../helpers/sidebar'),
-    Models = require('../models');
+    Models = require('../models'),
+    md5 = require('md5');
 // Importando el Helper sidebar
 var sidebar = require("../helpers/sidebar");
-var picLike = 0;
+
 module.exports = {
     // Action Methods
     index : (req, res)=>{
@@ -132,9 +133,60 @@ module.exports = {
         saveImage();
     },
     like : (req, res)=>{
-        res.json({likes: ++picLike});
+        // Se realiza al consulta de
+        // la imagen a la cula se le quiere
+        // incrementar su contador like
+        Models.Image.findOne({
+            filename: {$regex: req.params.image_id}
+        },function(err, img){
+            if(err || img == null){
+                console.log(`> Error al buscar imagen: ${req.params.image_id}`);
+                throw err;
+            }
+            img.likes = img.likes + 1;
+            img.save(function(err){
+                if(err){
+                    console.log("> Error al salvar like");
+                    res.json(err);
+                }else{
+                    res.json({
+                        likes: img.likes
+                    });
+                }
+            });
+        });
     },
     comment : (req, res)=>{
-        res.end(`Comentario de la imagen: ${req.params.image_id}`);
+        Models.Image.findOne({
+            filename:{
+                $regex: req.params.image_id
+            }
+        },(err, image)=>{
+            if(!err && image){
+                var newComment = new Models.Comment(
+                    req.body
+                );
+                // Hasheando el correo
+                // Instalar dependencia md5
+                newComment.gravatar = md5(newComment.email);
+                newComment.image_id = image._id;
+                // Se Salvan las modificaciones
+                newComment.save((err, comment)=>{
+                    if(err){
+                        console.log(`> Error al salvar comentario`);
+                        throw err;
+                    }
+                    // Se recarga la pagina con el comentario
+                    // Se situa la vista con un hash en el comentario
+                    // recien creado (Fragments)
+                    res.redirect(
+                        '/images/index/' + image.uniqueId + '#' + comment._id);
+                });
+            }else{
+                // No se encontro la imagen que
+                // se quiere comentar
+                res.redirect('./');
+            }
+        });
     }
 };
